@@ -144,8 +144,7 @@ public class Main extends PreferenceActivity implements OnPreferenceChangeListen
 
         sup.append("e");
 
-        if (modversion.contains(lol) && modversion.contains("Bulletproof")
-                && modversion.contains(sup)) {
+        if (modversion.contains("Warm")) {
             return false;
         }
 
