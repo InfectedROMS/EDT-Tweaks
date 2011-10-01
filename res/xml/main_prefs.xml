@@ -60,11 +60,13 @@
 
 		<CheckBoxPreference
 			android:key="pref_animate_off"
-			android:title="Animate screen off" />
+			android:title="Animate screen off" 
+			android:summary="Display CRT animation upon turning screen off" />
 
 		<CheckBoxPreference
 			android:key="pref_animate_on"
-			android:title="Animate screen on" />
+			android:title="Animate screen on" 
+			android:summary="Display CRT animation upon turning screen on"/>
 
 		<ListPreference
 			android:key="pref_overscroll_effect"
