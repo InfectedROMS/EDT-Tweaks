@@ -113,6 +113,28 @@ public class SenseTweaksActivity extends PreferenceActivity {
 
 			Settings.System.putInt(getContentResolver(),
 					"tweaks_show_recent_apps", checked ? 1 : 0);
+
+			if (!checked) {
+				// Prompt user to determine if they wish to reboot now
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage("Reboot Now To Apply Feature?");
+				builder.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								if (ShellInterface.isSuAvailable()) {
+									ShellInterface.runCommand("reboot");
+								}
+							}
+						}).setNegativeButton("No",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+
+				builder.show();
+			}
+
 			return true;
 
 		} else if (preference == mRosieActivity) {
