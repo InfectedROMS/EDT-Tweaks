@@ -35,7 +35,7 @@ public class SignalActivity extends PreferenceActivity implements OnPreferenceCh
 
     private static final String PREF_SIGNAL_TEXT_STYLE = "signal_text_style_pref";
 
-    private static final String PREF_TOGGLE_4G_ICON = "show_4g_icon";
+    //private static final String PREF_TOGGLE_4G_ICON = "show_4g_icon";
 
     //private static final String PREF_SHOW_SIGNAL_BARS = "show_signal_bars";
 
@@ -74,7 +74,7 @@ public class SignalActivity extends PreferenceActivity implements OnPreferenceCh
         mSignalColor3 = prefs.findPreference(PREF_SIGNAL_COLOR_3);
         mSignalColor4 = prefs.findPreference(PREF_SIGNAL_COLOR_4);
         mSignalColorStatic = prefs.findPreference(PREF_SIGNAL_COLOR_STATIC);
-        mShow4GIcon = (CheckBoxPreference) prefs.findPreference(PREF_TOGGLE_4G_ICON);
+        //mShow4GIcon = (CheckBoxPreference) prefs.findPreference(PREF_TOGGLE_4G_ICON);
         //mShowSignalBars = (CheckBoxPreference) prefs.findPreference(PREF_SHOW_SIGNAL_BARS);
 
         // check enabled settings
@@ -83,8 +83,8 @@ public class SignalActivity extends PreferenceActivity implements OnPreferenceCh
                 */
         mSignalAutoColor.setChecked((Settings.System.getInt(getContentResolver(),
                 "tweaks_signal_text_autocolor_enabled", 0) == 1));
-        mShow4GIcon.setChecked((Settings.System.getInt(getContentResolver(),
-                "tweaks_show_4g_icon", 0) == 1));
+       /* mShow4GIcon.setChecked((Settings.System.getInt(getContentResolver(),
+                "tweaks_show_4g_icon", 0) == 1)); */
 
         mSignalTextStyle.setOnPreferenceChangeListener(this);
         mSignalTextStyle.setValueIndex(Settings.System.getInt(getContentResolver(),
