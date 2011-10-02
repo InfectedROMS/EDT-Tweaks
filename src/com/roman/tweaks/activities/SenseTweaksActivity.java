@@ -1,9 +1,12 @@
 package com.roman.tweaks.activities;
 
 import com.roman.tweaks.R;
+import com.roman.tweaks.ShellInterface;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -152,6 +155,26 @@ public class SenseTweaksActivity extends PreferenceActivity {
 
 			Settings.System.putInt(getContentResolver(),
 					"tweaks_rosie_app_drawer_columns", checked ? 5 : 4);
+
+			// Prompt user to determine if they wish to reboot now
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Reboot Now To Apply Feature?");
+			builder.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							if (ShellInterface.isSuAvailable()) {
+								ShellInterface.runCommand("reboot");
+							}
+						}
+					}).setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+
+			builder.show();
+
 			return true;
 		} else if (preference == mEnableQuickQuickSettings) {
 			boolean checked = ((CheckBoxPreference) preference).isChecked();
