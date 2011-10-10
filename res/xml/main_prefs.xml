@@ -21,9 +21,13 @@
             <intent android:targetPackage="com.roman.tweaks" android:action="android.intent.action.MAIN" android:targetClass="com.roman.tweaks.activities.SenseActivity" />
         </Preference>
     </PreferenceCategory>
+    <PreferenceCategory android:title="CRT Screen On/Off Animation" android:key="crtanimation_cat">
+        <CheckBoxPreference android:title="Animate screen off" android:summary="Display CRT animation upon turning screen off"  android:key="pref_animate_off" />
+        <CheckBoxPreference android:title="Animate screen on" android:summary="Display CRT animation upon turning screen on" android:key="pref_animate_on" />        
+    </PreferenceCategory>
     <PreferenceCategory android:title="Other" android:key="other_cat">
-        <CheckBoxPreference android:title="Animate screen off" android:key="pref_animate_off" />
-        <CheckBoxPreference android:title="Animate screen on" android:key="pref_animate_on" />
         <ListPreference android:entries="@array/pref_overscroll_effect_entries" android:title="Overscroll Settings" android:key="pref_overscroll_effect" android:entryValues="@array/pref_overscroll_effect_values" />
     </PreferenceCategory>
+
+
 </PreferenceScreen>
