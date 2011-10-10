@@ -1,19 +1,21 @@
 
 package com.roman.tweaks.activities;
 
+import com.roman.tweaks.R;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-
-import com.roman.tweaks.R;
+import android.util.Log;
 
 public class ClockActivity extends PreferenceActivity implements OnPreferenceChangeListener {
     String pref;
@@ -30,10 +32,11 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
 
     private static final String PREF_CLOCK_COLOR = "clock_color_pref";
 
+    private static final String RPEF_HIDE_ALARM = "alarm";
+
     ListPreference mAmPmStyle;
-
     ListPreference mClockStyle;
-
+    CheckBoxPreference mHideAlarm;
     Preference mColorPref;
 
     /** Called when the activity is first created. */
@@ -46,6 +49,7 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
 
         mClockStyle = (ListPreference) prefs.findPreference(PREF_CLOCK_STYLE);
         mAmPmStyle = (ListPreference) prefs.findPreference(PREF_CLOCK_DISPLAY_STYLE);
+        mHideAlarm = (CheckBoxPreference) prefs.findPreference(RPEF_HIDE_ALARM);
         mColorPref = prefs.findPreference(PREF_CLOCK_COLOR);
 
         int styleValue = Settings.System.getInt(getContentResolver(),
@@ -58,6 +62,10 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
         mClockStyle.setValueIndex(clockVal);
         mClockStyle.setOnPreferenceChangeListener(this);
 
+        int alarm = Settings.System.getInt(getContentResolver(),
+                "tweaks_show_alarm_icon", 1);
+        mHideAlarm.setChecked(alarm == 0);
+
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
@@ -66,6 +74,14 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
                     Settings.System.getInt(getContentResolver(),
                             "tweaks_clock_color", Color.WHITE));
             cp.show();
+            return true;
+        } else if (preference == mHideAlarm) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+
+            Settings.System.putInt(getContentResolver(), "tweaks_show_alarm_icon",
+                    checked ? 0 : 1);
+
+            return true;
         }
 
         return false;
@@ -73,13 +89,11 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
 
     ColorPickerDialog.OnColorChangedListener mColorChangeListener = new ColorPickerDialog.OnColorChangedListener() {
 
-        @Override
         public void colorUpdate(int color) {
             Settings.System.putInt(getContentResolver(), "tweaks_clock_color",
                     color);
         }
 
-        @Override
         public void colorChanged(int color) {
             Settings.System.putInt(getContentResolver(), "tweaks_clock_color",
                     color);
@@ -87,12 +101,11 @@ public class ClockActivity extends PreferenceActivity implements OnPreferenceCha
         }
     };
 
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mAmPmStyle) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
 
-            Settings.System.putInt(getContentResolver(),"tweaks_clock_ampm_style",
+            Settings.System.putInt(getContentResolver(), "tweaks_clock_ampm_style",
                     statusBarAmPm);
             return true;
 

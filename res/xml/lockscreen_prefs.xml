@@ -1,41 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:title="Lockscreen preferences"
-	android:key="lockscreen_prefscreen">
-	<ListPreference
-		android:key="pref_lockscreen_style"
-		android:title="Choose lockscreen style"
-		android:entries="@array/pref_lockscreen_style_entries"
+<PreferenceScreen android:title="Lockscreen preferences"
+	android:key="lockscreen_prefscreen" xmlns:android="http://schemas.android.com/apk/res/android">
+	<ListPreference android:entries="@array/pref_lockscreen_style_entries"
+		android:title="Choose lockscreen style" android:key="pref_lockscreen_style"
 		android:entryValues="@array/pref_lockscreen_style_values" />
-
-	<CheckBoxPreference
-		android:title="Show Honeycomb clock font"
-		android:key="pref_clock" />
-
-	<PreferenceCategory
-		android:title="Custom Application Launchers"
-		android:enabled="false">
-
-		<Preference
-			android:key="pref_quadrant_1"
-			android:title="Quadrant 1 Activity"
-			android:summary="" />
-		<Preference
-			android:key="pref_quadrant_2"
-			android:title="Quadrant 2 Activity"
-			android:summary="" />
-		<Preference
-			android:key="pref_quadrant_3"
-			android:title="Quadrant 3 Activity"
-			android:summary="" />
-		<Preference
-			android:key="pref_quadrant_4"
-			android:title="Quadrant 4 Activity"
-			android:summary="" />
-
-
-	</PreferenceCategory>
-
-
 </PreferenceScreen>

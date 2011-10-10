@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<PreferenceCategory android:title="Clock Options">
-		<ListPreference
-			android:key="clock_style"
-			android:entries="@array/clock_entries"
-			android:entryValues="@array/clock_values"
-			android:title="Clock Style" />
-		
-		<ListPreference
-			android:key="clock_am_pm"
-			android:entries="@array/am_pm_entries"
-			android:entryValues="@array/am_pm_values"
-			android:title="AM PM Style" />
-		<Preference
-			android:key="clock_color_pref"
-			android:title="Choose Clock Color" />
+		<ListPreference android:entries="@array/clock_entries"
+			android:title="Clock Style" android:key="clock_style"
+			android:entryValues="@array/clock_values" />
+		<ListPreference android:entries="@array/am_pm_entries"
+			android:title="AM PM Style" android:key="clock_am_pm"
+			android:entryValues="@array/am_pm_values" />
+		<Preference android:title="Choose Clock Color" android:key="clock_color_pref" />
+		<CheckBoxPreference android:title="Hide alarm icon"
+			android:key="alarm"
+			android:summary="When unchecking this, make sure to go and disable/enable your alarms or they will not show" />
 	</PreferenceCategory>
 </PreferenceScreen>

@@ -13,86 +13,28 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.widget.Toast;
+import android.util.Log;
 
-import java.io.File;
-
-public class LockscreenActivity extends PreferenceActivity implements OnPreferenceChangeListener,
+public class LockscreensActivity extends PreferenceActivity implements OnPreferenceChangeListener,
         ShortcutPickHelper.OnPickListener {
 
     private static final String LOCKSCREEN_STYLE_PREF = "pref_lockscreen_style";
-
     private static final String LOCKSCREEN_QUADRANT_1_PREF = "pref_quadrant_1";
-
     private static final String LOCKSCREEN_QUADRANT_2_PREF = "pref_quadrant_2";
-
     private static final String LOCKSCREEN_QUADRANT_3_PREF = "pref_quadrant_3";
-
     private static final String LOCKSCREEN_QUADRANT_4_PREF = "pref_quadrant_4";
-    
     private static final String LOCKSCREEN_CLOCK_PREF = "pref_clock";
 
-    private LockscreenStyle mLockscreenStyle;
-
     private ListPreference mLockscreenStylePref;
-    
     private CheckBoxPreference mShowHoneyClock;
-
     private Preference mHoneyQuadrant1Pref;
-
     private Preference mHoneyQuadrant2Pref;
-
     private Preference mHoneyQuadrant3Pref;
-
     private Preference mHoneyQuadrant4Pref;
-
     private Preference mCurrentCustomActivityPreference;
-
     private String mCurrentCustomActivityString;
 
     private ShortcutPickHelper mPicker;
-
-    enum LockscreenStyle {
-        Slider, Rotary, RotaryRevamped, Lense, Honeycomb;
-
-        static public LockscreenStyle getStyleById(int id) {
-            switch (id) {
-                case 1:
-                    return Slider;
-                case 2:
-                    return Rotary;
-                case 3:
-                    return RotaryRevamped;
-                case 4:
-                    return Lense;
-                case 5:
-                    return Honeycomb;
-                default:
-                    return RotaryRevamped;
-            }
-        }
-
-        static public LockscreenStyle getStyleById(String id) {
-            return getStyleById(Integer.valueOf(id));
-        }
-
-        static public int getIdByStyle(LockscreenStyle lockscreenstyle) {
-            switch (lockscreenstyle) {
-                case Slider:
-                    return 1;
-                case Rotary:
-                    return 2;
-                case RotaryRevamped:
-                    return 3;
-                case Lense:
-                    return 4;
-                case Honeycomb:
-                    return 5;
-                default:
-                    return 3;
-            }
-        }
-    }
 
     public void onCreate(Bundle ofLove) {
         super.onCreate(ofLove);
@@ -102,23 +44,23 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
 
         /* Lockscreen Style and related related settings */
         mLockscreenStylePref = (ListPreference) prefSet.findPreference(LOCKSCREEN_STYLE_PREF);
-        mLockscreenStyle = LockscreenStyle.getStyleById(Settings.System.getInt(
-                getContentResolver(), "tweaks_lockscreen_style", 3));
-        mLockscreenStylePref
-                .setValue(String.valueOf(LockscreenStyle.getIdByStyle(mLockscreenStyle)));
+        int lockScreenStyle = Settings.System.getInt(getContentResolver(),
+                "tweaks_lockscreen_style", 0);
+        Log.e("ROMAN", "style: " + lockScreenStyle);
+        // mLockscreenStylePref.setValueIndex(lockScreenStyle);
         mLockscreenStylePref.setOnPreferenceChangeListener(this);
 
-        mHoneyQuadrant1Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_1_PREF);
-        mHoneyQuadrant2Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_2_PREF);
-        mHoneyQuadrant3Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_3_PREF);
-        mHoneyQuadrant4Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_4_PREF);
-        
-        mShowHoneyClock = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_CLOCK_PREF);
-        
+//        mHoneyQuadrant1Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_1_PREF);
+//        mHoneyQuadrant2Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_2_PREF);
+//        mHoneyQuadrant3Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_3_PREF);
+//        mHoneyQuadrant4Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_4_PREF);
+//
+//        mShowHoneyClock = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_CLOCK_PREF);
+
         mPicker = new ShortcutPickHelper(this, this);
+
     }
 
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
         if (preference == mHoneyQuadrant1Pref) {
@@ -147,26 +89,36 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         } else if (preference == mShowHoneyClock) {
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             int value = (checked ? 1 : 0);
-            
+
             Settings.System.putInt(getContentResolver(),
                     "tweaks_lockscreen_hc_clock_enabled", value);
+            return true;
         }
 
         return false;
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         mPicker.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String val = newValue.toString();
         if (preference == mLockscreenStylePref) {
-            mLockscreenStyle = LockscreenStyle.getStyleById((String) newValue);
+
+            int index = 0;
+            CharSequence[] entries = ((ListPreference) preference).getEntryValues();
+
+            for (int i = 0; i < entries.length; i++) {
+                if (entries[i].equals((String) newValue)) {
+                    index = i;
+                    Log.e("Roman", "break: " + i);
+                    break;
+                }
+            }
+            int newint = Integer.parseInt(entries[index] + "");
             Settings.System.putInt(getContentResolver(), "tweaks_lockscreen_style",
-                    LockscreenStyle.getIdByStyle(mLockscreenStyle));
+                    newint);
+            // Log.e("Roman", "new val: " + newint);
             // updateStylePrefs(mLockscreenStyle, mInCallStyle);
             return true;
         }
@@ -174,7 +126,6 @@ public class LockscreenActivity extends PreferenceActivity implements OnPreferen
         return false;
     }
 
-    @Override
     public void shortcutPicked(String uri, String friendlyName, boolean isApplication) {
         if (Settings.System.putString(getContentResolver(), mCurrentCustomActivityString, uri)) {
             mCurrentCustomActivityPreference.setSummary(friendlyName);

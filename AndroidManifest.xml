@@ -1,76 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.roman.tweaks"
-	android:versionCode="2">
-
-	<uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
-	<uses-permission android:name="android.permission.SET_TIME_ZONE"></uses-permission>
-	<supports-screens
-		android:anyDensity="true"
-		android:largeScreens="true"
-		android:smallScreens="true"
-		android:normalScreens="true"></supports-screens>
-
-	<application
-		android:icon="@drawable/icon"
-		android:label="@string/app_name">
-		<activity
-			android:label="@string/app_name"
-			android:name=".Main"
-			android:launchMode="singleTask">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-
-		<receiver android:name="Receiver">
-			<intent-filter>
-				<action android:name="com.roman.tweaks.OPEN"></action>
-				<action android:name="com.roman.intents.HARD_REBOOT_ACTION"></action>
-			</intent-filter>
-		</receiver>
-
-		<activity
-			android:label="Tweaks - Lockscreen Settings"
-			android:name=".activities.LockscreenActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-			</intent-filter>
-		</activity>
-
-		<activity
-			android:label="Tweaks - Clock Options"
-			android:name=".activities.ClockActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-			</intent-filter>
-		</activity>
-
-		<activity
-			android:label="Tweaks - Battery Options"
-			android:name=".activities.BatteryActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-			</intent-filter>
-		</activity>
-
-		<activity
-			android:label="Tweaks - Signal Options"
-			android:name=".activities.SignalActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-			</intent-filter>
-		</activity>
-
-		<activity
-			android:label="Tweaks - Sense Options"
-			android:name=".activities.SenseTweaksActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"></action>
-			</intent-filter>
-		</activity>
-
-	</application>
+<manifest android:versionCode="18" package="com.roman.tweaks"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.SET_TIME_ZONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <supports-screens android:anyDensity="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" />
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="10" />
+    <application android:label="@string/app_name" android:icon="@drawable/icon">
+        <activity android:label="@string/app_name" android:name=".Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <receiver android:name=".Receiver">
+            <intent-filter>
+                <action android:name="com.roman.tweaks.OPEN" />
+                <action android:name="com.roman.intents.HARD_REBOOT_ACTION" />
+            </intent-filter>
+        </receiver>
+        <activity android:label="Tweaks - Lockscreen Settings" android:name=".activities.LockscreensActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="Tweaks - Quick Settings" android:name=".activities.QuickSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="Tweaks - Clock Options" android:name=".activities.ClockActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="Tweaks - Battery Options" android:name=".activities.BatteryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="Tweaks - Signal Options" android:name=".activities.SignalsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="Tweaks - Sense Options" android:name=".activities.SenseActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>
