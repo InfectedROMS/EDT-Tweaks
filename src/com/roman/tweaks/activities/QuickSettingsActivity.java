@@ -73,7 +73,7 @@ public class QuickSettingsActivity extends PreferenceActivity {
                         }
                     })
 
-                    .setNegativeButton("For Science!", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }
