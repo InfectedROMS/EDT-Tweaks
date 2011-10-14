@@ -2,7 +2,7 @@
 <PreferenceScreen android:key="pref_root"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Statusbar Tweaks" android:key="statusbar_cat">
-        <Preference android:title="Quick settings... settings" android:key="quick_settings">
+        <Preference android:title="Show/Hide Quick settings" android:key="quick_settings">
             <intent android:targetPackage="com.roman.tweaks" android:action="android.intent.action.MAIN" android:targetClass="com.roman.tweaks.activities.QuickSettingsActivity" />
         </Preference>
         <Preference android:title="Lockscreen Settings" android:key="lockscreen_settings">
