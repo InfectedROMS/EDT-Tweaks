@@ -71,18 +71,22 @@
         <item>3</item>
     </string-array>
     <string-array name="quick_settings_entries">
-        <item>Auto rotation</item>
-        <item>Wi-Fi</item>
+        <item>Rotation</item>
+        <item>WIFI</item>
         <item>Bluetooth</item>
         <item>Mobile Network</item>
-        <item>Brightness</item>
-        <item>Wi-Fi HotSpot</item>
-        <item>All settings</item>
+        <item>Auto Brightness</item>
+        <item>Sprint Hotspot</item>
+        <item>All Settings</item>
         <item>GPS</item>
-        <item>Ringer volume</item>
-        <item>Task Manager</item>
-        <item>Media volume</item>
-        <item>Vibration</item>
-        <item>Torch</item>
+        <item>WIMAX</item>
+        <item>Taskmanager</item>
+        <item>Volume</item>
+        <item>Flashlight</item>
+        <item>Restart</item>
+        <item>Airplane Mode</item>
+        <item>Silent Mode</item>
+        <item>Vibrate Mode</item>
+        <item>ADB Wireless</item>
     </string-array>
 </resources>
