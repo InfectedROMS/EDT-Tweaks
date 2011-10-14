@@ -13,5 +13,7 @@
         <Preference android:title="[Auto] 2 bars" android:key="signal_color_2" />
         <Preference android:title="[Auto] 3 bars" android:key="signal_color_3" />
         <Preference android:title="[Auto] 4 bars" android:key="signal_color_4" />
+        <Preference android:title="[Auto] 5 bars" android:key="signal_color_5" />
+        <Preference android:title="[Auto] 6 bars" android:key="signal_color_6" />
     </PreferenceCategory>
 </PreferenceScreen>
