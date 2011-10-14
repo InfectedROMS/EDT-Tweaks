@@ -60,14 +60,12 @@
         <item>2</item>
         <item>0</item>
     </string-array>
-    <string-array name="pref_overscroll_effect_entries">
-        <item>None</item>
+    <string-array name="pref_overscroll_effect_entries">        
         <item>Edge Glow</item>
         <item>Bounce and Glow</item>
         <item>Bounce</item>
     </string-array>
-    <string-array name="pref_overscroll_effect_values">
-        <item>0</item>
+    <string-array name="pref_overscroll_effect_values">        
         <item>1</item>
         <item>2</item>
         <item>3</item>
