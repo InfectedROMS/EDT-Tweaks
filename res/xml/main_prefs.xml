@@ -20,6 +20,9 @@
         <Preference android:title="Sense options" android:key="sense_options_pref">
             <intent android:targetPackage="com.roman.tweaks" android:action="android.intent.action.MAIN" android:targetClass="com.roman.tweaks.activities.SenseActivity" />
         </Preference>
+        <Preference android:title="Misc options" android:key="misc_options_pref">
+            <intent android:targetPackage="com.roman.tweaks" android:action="android.intent.action.MAIN" android:targetClass="com.roman.tweaks.activities.MiscActivity" />
+        </Preference>    
     </PreferenceCategory>
     <PreferenceCategory android:title="CRT Screen On/Off Animation" android:key="crtanimation_cat">
         <CheckBoxPreference android:title="Animate screen off" android:summary="Display CRT animation upon turning screen off"  android:key="pref_animate_off" />

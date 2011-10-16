@@ -89,4 +89,14 @@
         <item>Vibrate Mode</item>
         <item>ADB Wireless</item>
     </string-array>
+    <string-array name="pref_capacitive_backlight_entries">        
+        <item>Off</item>
+        <item>Dim</item>
+        <item>Full On (Default)</item>
+    </string-array>
+    <string-array name="pref_capacitive_backlight_values">        
+        <item>0</item>
+        <item>2</item>
+        <item>20</item>
+    </string-array>
 </resources>

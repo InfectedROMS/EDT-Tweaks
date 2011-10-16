@@ -3,6 +3,8 @@ package com.roman.tweaks;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
+import android.widget.Toast;
 
 public class Receiver extends BroadcastReceiver {
 
@@ -18,6 +20,17 @@ public class Receiver extends BroadcastReceiver {
 			if (ShellInterface.isSuAvailable()) {
 				ShellInterface.runCommand("reboot");
 			}
+		} else if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {		
+			// After boot has been completed
+			
+			// Reset capacitive backlight as this doesn't persist through reboots			
+			int capacitiveBackLightVal = Settings.System.getInt(context.getContentResolver(),
+	                "tweaks_capacitive_backlight", 20);
+			  if (ShellInterface.isSuAvailable()) {
+					ShellInterface.runCommand("echo '"+capacitiveBackLightVal+"' > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents");
+				}    
+			
+			
 		}
 	}
 

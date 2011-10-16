@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:key="sense_pref_root"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Misc Tweaks">
+       	<ListPreference android:entries="@array/pref_capacitive_backlight_entries" android:title="Capacitive Backlight" android:key="pref_capacitive_backlight" android:entryValues="@array/pref_capacitive_backlight_values" android:summary="Brightness of backlight behind bottom capacitive buttons" android:defaultValue="20" />
+    </PreferenceCategory>
+</PreferenceScreen>
