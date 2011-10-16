@@ -2,11 +2,13 @@
 package com.roman.tweaks.activities;
 
 import com.roman.tweaks.R;
+import com.roman.tweaks.ShellInterface;
 import com.roman.tweaks.utils.ShortcutPickHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -24,6 +26,7 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
     private static final String LOCKSCREEN_QUADRANT_3_PREF = "pref_quadrant_3";
     private static final String LOCKSCREEN_QUADRANT_4_PREF = "pref_quadrant_4";
     private static final String LOCKSCREEN_CLOCK_PREF = "pref_clock";
+    private static final String PREF_CARRIER_CAPTION = "pref_lockscreen_caption";
 
     private ListPreference mLockscreenStylePref;
     private CheckBoxPreference mShowHoneyClock;
@@ -32,6 +35,7 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
     private Preference mHoneyQuadrant3Pref;
     private Preference mHoneyQuadrant4Pref;
     private Preference mCurrentCustomActivityPreference;
+    private EditTextPreference mLockscreenCaptionPref;
     private String mCurrentCustomActivityString;
 
     private ShortcutPickHelper mPicker;
@@ -49,6 +53,10 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
         Log.e("ROMAN", "style: " + lockScreenStyle);
         // mLockscreenStylePref.setValueIndex(lockScreenStyle);
         mLockscreenStylePref.setOnPreferenceChangeListener(this);
+        
+        mLockscreenCaptionPref = (EditTextPreference) prefSet.findPreference(PREF_CARRIER_CAPTION);
+        mLockscreenCaptionPref.setOnPreferenceChangeListener(this);
+        
 
 //        mHoneyQuadrant1Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_1_PREF);
 //        mHoneyQuadrant2Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_2_PREF);
@@ -122,6 +130,19 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
             // updateStylePrefs(mLockscreenStyle, mInCallStyle);
             return true;
         }
+        else if (preference == mLockscreenCaptionPref) {
+
+			String inputCarrierText = String.valueOf((String) newValue);
+			Settings.System.putString(getContentResolver(),
+					"tweaks_lockscreen_Caption", inputCarrierText);
+			
+			if (ShellInterface.isSuAvailable()) {
+				ShellInterface.runCommand("echo '"+inputCarrierText+"' > /system/customize/lock_carrier.txt");
+			}
+			return true;
+
+		}
+
 
         return false;
     }

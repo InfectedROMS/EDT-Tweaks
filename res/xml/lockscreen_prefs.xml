@@ -4,4 +4,7 @@
 	<ListPreference android:entries="@array/pref_lockscreen_style_entries"
 		android:title="Choose lockscreen style" android:key="pref_lockscreen_style"
 		android:entryValues="@array/pref_lockscreen_style_values" />
+	<EditTextPreference android:title="Carrier Caption"
+		android:key="pref_lockscreen_caption" android:summary="The text to display at top of the lockscreen"
+		android:defaultValue="Warm TwoPointThree" android:dialogTitle="Lockscreen caption" />
 </PreferenceScreen>
