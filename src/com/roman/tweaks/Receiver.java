@@ -16,21 +16,27 @@ public class Receiver extends BroadcastReceiver {
 			Intent i = new Intent(context, Main.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
-		} else if (intent.getAction().equals("com.roman.intents.HARD_REBOOT_ACTION")) {
+		} else if (intent.getAction().equals(
+				"com.roman.intents.HARD_REBOOT_ACTION")) {
 			if (ShellInterface.isSuAvailable()) {
 				ShellInterface.runCommand("reboot");
 			}
-		} else if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {		
+		} else if (intent.getAction().equals(
+				"android.intent.action.BOOT_COMPLETED")) {
 			// After boot has been completed
-			
+
 			// Reset capacitive backlight as this doesn't persist through reboots			
-			int capacitiveBackLightVal = Settings.System.getInt(context.getContentResolver(),
-	                "tweaks_capacitive_backlight", 20);
-			  if (ShellInterface.isSuAvailable()) {
+			int capacitiveBackLightVal = Settings.System.getInt(
+					context.getContentResolver(),
+					"tweaks_capacitive_backlight", -1);
+
+			// if capacitive back light has been previously configured, adjust accordingly
+			if (capacitiveBackLightVal >= 0) {				
+				if (ShellInterface.isSuAvailable()) {
 					ShellInterface.runCommand("echo '"+capacitiveBackLightVal+"' > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents");
-				}    
-			
-			
+				}
+			}
+
 		}
 	}
 
