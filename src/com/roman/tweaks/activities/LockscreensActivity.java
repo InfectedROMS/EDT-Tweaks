@@ -134,7 +134,7 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
 
 			String inputCarrierText = String.valueOf((String) newValue);
 			Settings.System.putString(getContentResolver(),
-					"tweaks_lockscreen_Caption", inputCarrierText);
+					"tweaks_lockscreen_caption", inputCarrierText);
 			
 			if (ShellInterface.isSuAvailable()) {
 				ShellInterface.runCommand("echo '"+inputCarrierText+"' > /system/customize/lock_carrier.txt");
