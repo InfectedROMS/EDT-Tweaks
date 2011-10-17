@@ -3,5 +3,10 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Misc Tweaks">
        	<ListPreference android:entries="@array/pref_capacitive_backlight_entries" android:title="Capacitive Backlight" android:key="pref_capacitive_backlight" android:entryValues="@array/pref_capacitive_backlight_values" android:summary="Brightness of backlight behind bottom capacitive buttons" android:defaultValue="20" />
+
+        <Preference android:title="Phone Info" android:key="pref_phone_info" android:summary="Hidden HTC phone diagnostics screen">
+            <intent android:targetPackage="com.android.settings" android:action="android.intent.action.MAIN" android:targetClass="com.android.settings.RadioInfo" />
+        </Preference>
+
     </PreferenceCategory>
 </PreferenceScreen>
