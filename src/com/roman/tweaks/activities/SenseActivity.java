@@ -29,7 +29,7 @@ public class SenseActivity extends PreferenceActivity {
 	private static final String PREF_CUSTOM_ACTIVITY = "pref_rosie_activity";
 	private static final String PREF_RECENT_APPS = "show_recent_apps";
 	private static final String PREF_RESET_ROSIE = "use_custom_rosie_activity";
-	private static final String PREF_ENABLE_SCREENSHOTS = "enable_screenshots";
+	/* private static final String PREF_ENABLE_SCREENSHOTS = "enable_screenshots"; */
 	private static final String PREF_ENABLE_UNLOCK_ANIM = "enable_unlock_animation";
 	private static final String PREF_NUM_COLUMNS_APP_DRAWER = "app_drawer_app_columns";
 	private static final String PREF_SUPER_QUICK_SETTINGS = "super_quick_settings";
@@ -61,8 +61,8 @@ public class SenseActivity extends PreferenceActivity {
 				.findPreference(PREF_RESET_ROSIE);
 		mShowRecentApps = (CheckBoxPreference) prefs
 				.findPreference(PREF_RECENT_APPS);
-		mEnableScreenshots = (CheckBoxPreference) prefs
-				.findPreference(PREF_ENABLE_SCREENSHOTS);
+		/* mEnableScreenshots = (CheckBoxPreference) prefs
+				.findPreference(PREF_ENABLE_SCREENSHOTS); */
 		mEnableUnlockAnimation = (CheckBoxPreference) prefs
 				.findPreference(PREF_ENABLE_UNLOCK_ANIM);
 		mEnableFiveColumns = (CheckBoxPreference) prefs
@@ -85,9 +85,10 @@ public class SenseActivity extends PreferenceActivity {
 				"tweaks_rosie_remap_personalize", 1) == 1) ? true : false;
 		mUseRosieCustomActivity.setChecked(checked);
 
+		/*
 		checked = (Settings.System.getInt(getContentResolver(),
 				"tweaks_enable_screenshot", 1) == 1) ? true : false;
-		mEnableScreenshots.setChecked(checked);
+		mEnableScreenshots.setChecked(checked); */
 
 		/* unlock animation */
 		checked = (Settings.System.getInt(getContentResolver(),
