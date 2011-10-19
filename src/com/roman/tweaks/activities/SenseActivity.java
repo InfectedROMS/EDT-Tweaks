@@ -216,7 +216,27 @@ public class SenseActivity extends PreferenceActivity {
 			boolean checked = ((CheckBoxPreference) preference).isChecked();
 
 			Settings.System.putInt(getContentResolver(),
-					"tweaks_rosie_use_pages", checked ? 1 : 0);
+					"tweaks_rosie_use_pages", checked ? 1 : 0);			
+
+			// Prompt user to determine if they wish to reboot now
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Reboot Now To Apply Feature?");
+			builder.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							if (ShellInterface.isSuAvailable()) {
+								ShellInterface.runCommand("reboot");
+							}
+						}
+					}).setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+
+			builder.show();
+			
 			return true;
 		}
 

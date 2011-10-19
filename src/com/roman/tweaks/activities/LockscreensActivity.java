@@ -5,6 +5,8 @@ import com.roman.tweaks.R;
 import com.roman.tweaks.ShellInterface;
 import com.roman.tweaks.utils.ShortcutPickHelper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -128,6 +130,27 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
                     newint);
             // Log.e("Roman", "new val: " + newint);
             // updateStylePrefs(mLockscreenStyle, mInCallStyle);
+            
+
+			// Prompt user to determine if they wish to reboot now
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Reboot Now To Apply Feature?");
+			builder.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							if (ShellInterface.isSuAvailable()) {
+								ShellInterface.runCommand("reboot");
+							}
+						}
+					}).setNegativeButton("No",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+
+			builder.show();
+            
             return true;
         }
         else if (preference == mLockscreenCaptionPref) {
