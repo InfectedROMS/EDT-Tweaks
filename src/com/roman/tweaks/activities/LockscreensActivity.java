@@ -29,6 +29,7 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
     private static final String LOCKSCREEN_QUADRANT_4_PREF = "pref_quadrant_4";
     private static final String LOCKSCREEN_CLOCK_PREF = "pref_clock";
     private static final String PREF_CARRIER_CAPTION = "pref_lockscreen_caption";
+    private static final String LOCKSCREEN_VOLUME_WAKE = "pref_volume_wake";
 
     private ListPreference mLockscreenStylePref;
     private CheckBoxPreference mShowHoneyClock;
@@ -38,6 +39,7 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
     private Preference mHoneyQuadrant4Pref;
     private Preference mCurrentCustomActivityPreference;
     private EditTextPreference mLockscreenCaptionPref;
+    private CheckBoxPreference mVolumeWake;
     private String mCurrentCustomActivityString;
 
     private ShortcutPickHelper mPicker;
@@ -45,7 +47,6 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
     public void onCreate(Bundle ofLove) {
         super.onCreate(ofLove);
         addPreferencesFromResource(R.xml.lockscreen_prefs);
-
         PreferenceScreen prefSet = getPreferenceScreen();
 
         /* Lockscreen Style and related related settings */
@@ -58,6 +59,12 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
         
         mLockscreenCaptionPref = (EditTextPreference) prefSet.findPreference(PREF_CARRIER_CAPTION);
         mLockscreenCaptionPref.setOnPreferenceChangeListener(this);
+        
+
+        mVolumeWake = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_VOLUME_WAKE);
+        boolean checked = (Settings.System.getInt(getContentResolver(),	"tweaks_use_volume", 0) == 1) ? true : false;
+      	mVolumeWake.setChecked(checked);
+
         
 
 //        mHoneyQuadrant1Pref = prefSet.findPreference(LOCKSCREEN_QUADRANT_1_PREF);
@@ -103,6 +110,12 @@ public class LockscreensActivity extends PreferenceActivity implements OnPrefere
             Settings.System.putInt(getContentResolver(),
                     "tweaks_lockscreen_hc_clock_enabled", value);
             return true;
+        } else if (preference == mVolumeWake) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            int value = (checked ? 1 : 0);
+            
+            Settings.System.putInt(getContentResolver(),
+                    "tweaks_use_volume", value);
         }
 
         return false;

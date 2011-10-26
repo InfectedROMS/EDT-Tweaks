@@ -7,4 +7,5 @@
 	<EditTextPreference android:title="Carrier Caption"
 		android:key="pref_lockscreen_caption" android:summary="The text to display at top of the lockscreen"
 		android:defaultValue="Warm TwoPointThree" android:dialogTitle="Lockscreen caption" />
+	<CheckBoxPreference android:title="Volume keys wake screen" android:key="pref_volume_wake" />
 </PreferenceScreen>
